@@ -213,6 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CinemachineCameraTarget: {fileID: 4757293179246094501}
+  gun: {fileID: 0}
   bulletPrefab: {fileID: 0}
   bulletSpawnPoint: {fileID: 3993749770990368098}
 --- !u!114 &6546455947986577072
@@ -252,13 +253,13 @@ MonoBehaviour:
   topClamp: 90
   bottomClamp: -90
   bulletDamage: 10
-  bulletSpeed: 10
-  bulletRange: 15
-  fireRate: 0.2
+  bulletSpeed: 186.1
+  bulletLifeSpan: 1
+  fireRate: 0.12
   bulletSpread: 5
   bulletCount: 1
-  maxAmmo: 30
-  currentAmmo: 30
+  maxAmmo: 300
+  currentAmmo: 268
 --- !u!1 &4757293179246094501
 GameObject:
   m_ObjectHideFlags: 0
