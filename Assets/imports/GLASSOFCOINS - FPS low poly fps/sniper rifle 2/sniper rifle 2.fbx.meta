@@ -1,7 +1,14 @@
 fileFormatVersion: 2
 guid: 3083a36aaa5642f468195b299e70b38e
+AssetOrigin:
+  serializedVersion: 1
+  productId: 196540
+  packageName: GLASSOFCOINS - Low Poly FPS pack
+  packageVersion: 1.0
+  assetPath: Assets/GLASSOFCOINS - FPS low poly fps/sniper rifle 2/sniper rifle 2.fbx
+  uploadId: 444076
 ModelImporter:
-  serializedVersion: 20200
+  serializedVersion: 22200
   internalIDToNameTable:
   - first:
       74: -4985197073758209554
@@ -27,7 +34,12 @@ ModelImporter:
   - first:
       74: -3693710585349060492
     second: sniper rifle 2_hands|Run_sniper rifle 2
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MaterialGun
+    second: {fileID: 2100000, guid: f30fd9841b4b7934384dba284b241af7, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -38,9 +50,8 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -63,10 +74,12 @@ ModelImporter:
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
+    importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    nodeNameCollisionStrategy: 0
     fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -78,6 +91,7 @@ ModelImporter:
     skinWeightsMode: 0
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
+    optimizeBones: 1
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
@@ -88,6 +102,7 @@ ModelImporter:
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -120,14 +135,9 @@ ModelImporter:
   humanoidOversampling: 1
   avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 0
+  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 196540
-  packageName: GLASSOFCOINS - Low Poly FPS pack
-  packageVersion: 1.0
-  assetPath: Assets/GLASSOFCOINS - FPS low poly fps/sniper rifle 2/sniper rifle 2.fbx
-  uploadId: 444076

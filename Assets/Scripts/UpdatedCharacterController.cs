@@ -61,6 +61,8 @@ public class UpdatedCharacterController : MonoBehaviour
 
     private float _lastFireTime = 0f;
 
+    public System.Action OnActualJump;
+
     private bool IsCurrentDeviceMouse
     {
         get
@@ -104,6 +106,17 @@ public class UpdatedCharacterController : MonoBehaviour
 
     private void Update()
     {
+        if (Application.isPlaying)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+
         if (_input.dash && canDash && !isDashing)
         {
             StartCoroutine(Dash());
@@ -201,6 +214,7 @@ public class UpdatedCharacterController : MonoBehaviour
         {
             inputDirection = transform.right * _input.move.x + transform.forward * _input.move.y;
         }
+        Debug.Log("Y velocity: " + _verticalVelocity); // Debug log for vertical velocity
         _controller.Move(
             inputDirection.normalized * (_speed * Time.deltaTime)
                 + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime
@@ -224,6 +238,7 @@ public class UpdatedCharacterController : MonoBehaviour
 
     private void JumpAndGravity()
     {
+        Debug.Log("Grounded: " + Grounded + " | requesting jump:" + _input.jump); // Debug log for grounded and vertical velocity
         if (Grounded)
         {
             _fallTimeoutDelta = _playerStats.fallTimeout;
@@ -233,9 +248,7 @@ public class UpdatedCharacterController : MonoBehaviour
             }
             if (_input.jump && _jumpTimeoutDelta <= 0.0f)
             {
-                _verticalVelocity = Mathf.Sqrt(
-                    _playerStats.jumpHeight * -2f * _playerStats.gravity
-                );
+                ActuallyJump();
                 _input.jump = false;
             }
             if (_jumpTimeoutDelta >= 0.0f)
@@ -260,6 +273,15 @@ public class UpdatedCharacterController : MonoBehaviour
         {
             _verticalVelocity = 0.0f;
         }
+    }
+
+    private void ActuallyJump()
+    {
+        _verticalVelocity = Mathf.Sqrt(_playerStats.jumpHeight * -2f * _playerStats.gravity);
+        OnActualJump?.Invoke();
+        Debug.Log("jumpheight: " + _playerStats.jumpHeight); // Debug log for jump height
+        Debug.Log("gravity: " + _playerStats.gravity); // Debug log for gravity
+        Debug.Log("Jumping with vertical velocity: " + _verticalVelocity); // Debug log for jump
     }
 
     private bool CeilingCheck()
@@ -342,10 +364,10 @@ public class UpdatedCharacterController : MonoBehaviour
         Color transparentGreen = new Color(0.0f, 1.0f, 0.0f, 0.35f);
         Color transparentRed = new Color(1.0f, 0.0f, 0.0f, 0.35f);
 
-        if (Grounded)
-            Gizmos.color = transparentGreen;
-        else
-            Gizmos.color = transparentRed;
+        if (transform == null || _playerStats == null)
+            return;
+
+        Gizmos.color = Grounded ? transparentGreen : transparentRed;
 
         Gizmos.DrawSphere(
             new Vector3(
@@ -356,10 +378,7 @@ public class UpdatedCharacterController : MonoBehaviour
             _playerStats.groundedRadius
         );
 
-        if (CeilingCheck())
-            Gizmos.color = transparentRed;
-        else
-            Gizmos.color = transparentGreen;
+        Gizmos.color = CeilingCheck() ? transparentRed : transparentGreen;
         Gizmos.DrawSphere(
             new Vector3(
                 transform.position.x,

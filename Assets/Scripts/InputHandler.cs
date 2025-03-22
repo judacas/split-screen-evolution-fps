@@ -35,6 +35,7 @@ public class InputHandler : MonoBehaviour
 
     public void OnJump(InputValue value)
     {
+        Debug.Log("Jump input received: " + value.isPressed); // Debug log for jump input
         JumpInput(value.isPressed);
     }
 
