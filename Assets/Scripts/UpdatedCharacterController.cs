@@ -214,7 +214,6 @@ public class UpdatedCharacterController : MonoBehaviour
         {
             inputDirection = transform.right * _input.move.x + transform.forward * _input.move.y;
         }
-        Debug.Log("Y velocity: " + _verticalVelocity); // Debug log for vertical velocity
         _controller.Move(
             inputDirection.normalized * (_speed * Time.deltaTime)
                 + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime
@@ -238,14 +237,13 @@ public class UpdatedCharacterController : MonoBehaviour
 
     private void JumpAndGravity()
     {
-        Debug.Log("Grounded: " + Grounded + " | requesting jump:" + _input.jump); // Debug log for grounded and vertical velocity
         if (Grounded)
         {
             _fallTimeoutDelta = _playerStats.fallTimeout;
-            if (_verticalVelocity < 0.0f)
-            {
-                _verticalVelocity = -2f;
-            }
+            // if (_verticalVelocity < 0.0f)
+            // {
+            //     _verticalVelocity = -2f;
+            // }
             if (_input.jump && _jumpTimeoutDelta <= 0.0f)
             {
                 ActuallyJump();
@@ -279,9 +277,6 @@ public class UpdatedCharacterController : MonoBehaviour
     {
         _verticalVelocity = Mathf.Sqrt(_playerStats.jumpHeight * -2f * _playerStats.gravity);
         OnActualJump?.Invoke();
-        Debug.Log("jumpheight: " + _playerStats.jumpHeight); // Debug log for jump height
-        Debug.Log("gravity: " + _playerStats.gravity); // Debug log for gravity
-        Debug.Log("Jumping with vertical velocity: " + _verticalVelocity); // Debug log for jump
     }
 
     private bool CeilingCheck()
